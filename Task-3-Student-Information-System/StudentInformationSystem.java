@@ -1,156 +1,81 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class StudentInformationSystem extends JFrame implements ActionListener {
 
-    // Components
     private JTextField txtId, txtName, txtCourse;
     private JButton btnAdd, btnUpdate, btnDelete, btnClear;
-    private JTable table;
-    private DefaultTableModel model;
-
-    // Data storage
-    private ArrayList<Student> students = new ArrayList<>();
 
     public StudentInformationSystem() {
-
         setTitle("Student Information System");
-        setSize(700, 400);
+        setSize(500, 280);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setLayout(new BorderLayout(15, 15));
 
-        // Input Panel
-        JPanel inputPanel = new JPanel(new GridLayout(4, 2, 10, 10));
+        // ================= FORM PANEL =================
+        JPanel formPanel = new JPanel(new GridLayout(3, 2, 10, 10));
+        formPanel.setBorder(BorderFactory.createTitledBorder("Student Details"));
 
-        inputPanel.add(new JLabel("Student ID:"));
+        formPanel.add(new JLabel("Student ID:"));
         txtId = new JTextField();
-        inputPanel.add(txtId);
+        formPanel.add(txtId);
 
-        inputPanel.add(new JLabel("Student Name:"));
+        formPanel.add(new JLabel("Student Name:"));
         txtName = new JTextField();
-        inputPanel.add(txtName);
+        formPanel.add(txtName);
 
-        inputPanel.add(new JLabel("Course:"));
+        formPanel.add(new JLabel("Course:"));
         txtCourse = new JTextField();
-        inputPanel.add(txtCourse);
+        formPanel.add(txtCourse);
+
+        // ================= BUTTON PANEL =================
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
 
         btnAdd = new JButton("Add");
         btnUpdate = new JButton("Update");
         btnDelete = new JButton("Delete");
         btnClear = new JButton("Clear");
 
-        inputPanel.add(btnAdd);
-        inputPanel.add(btnUpdate);
-        inputPanel.add(btnDelete);
-        inputPanel.add(btnClear);
+        buttonPanel.add(btnAdd);
+        buttonPanel.add(btnUpdate);
+        buttonPanel.add(btnDelete);
+        buttonPanel.add(btnClear);
 
-        // Table
-        model = new DefaultTableModel(new String[]{"ID", "Name", "Course"}, 0);
-        table = new JTable(model);
-        JScrollPane scrollPane = new JScrollPane(table);
+        // ================= ADD PANELS TO FRAME =================
+        add(formPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
 
-        // Add panels
-        add(inputPanel, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
-
-        // Event handling
+        // ================= ACTION LISTENERS =================
         btnAdd.addActionListener(this);
         btnUpdate.addActionListener(this);
         btnDelete.addActionListener(this);
         btnClear.addActionListener(this);
 
-        table.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                int row = table.getSelectedRow();
-                txtId.setText(model.getValueAt(row, 0).toString());
-                txtName.setText(model.getValueAt(row, 1).toString());
-                txtCourse.setText(model.getValueAt(row, 2).toString());
-            }
-        });
+        setVisible(true);
     }
 
-    // Button actions
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource() == btnAdd) {
-            addStudent();
-        } else if (e.getSource() == btnUpdate) {
-            updateStudent();
-        } else if (e.getSource() == btnDelete) {
-            deleteStudent();
-        } else if (e.getSource() == btnClear) {
-            clearFields();
+            JOptionPane.showMessageDialog(this, "Student Added!");
+        } 
+        else if (e.getSource() == btnUpdate) {
+            JOptionPane.showMessageDialog(this, "Student Updated!");
+        } 
+        else if (e.getSource() == btnDelete) {
+            JOptionPane.showMessageDialog(this, "Student Deleted!");
+        } 
+        else if (e.getSource() == btnClear) {
+            txtId.setText("");
+            txtName.setText("");
+            txtCourse.setText("");
         }
-    }
-
-    private void addStudent() {
-        String id = txtId.getText();
-        String name = txtName.getText();
-        String course = txtCourse.getText();
-
-        if (id.isEmpty() || name.isEmpty() || course.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "All fields are required!");
-            return;
-        }
-
-        students.add(new Student(id, name, course));
-        model.addRow(new Object[]{id, name, course});
-        clearFields();
-    }
-
-    private void updateStudent() {
-        int row = table.getSelectedRow();
-
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Select a student to update!");
-            return;
-        }
-
-        model.setValueAt(txtId.getText(), row, 0);
-        model.setValueAt(txtName.getText(), row, 1);
-        model.setValueAt(txtCourse.getText(), row, 2);
-
-        clearFields();
-    }
-
-    private void deleteStudent() {
-        int row = table.getSelectedRow();
-
-        if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Select a student to delete!");
-            return;
-        }
-
-        model.removeRow(row);
-        clearFields();
-    }
-
-    private void clearFields() {
-        txtId.setText("");
-        txtName.setText("");
-        txtCourse.setText("");
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new StudentInformationSystem().setVisible(true);
-        });
-    }
-}
-
-// Student class
-class Student {
-    String id;
-    String name;
-    String course;
-
-    Student(String id, String name, String course) {
-        this.id = id;
-        this.name = name;
-        this.course = course;
+        SwingUtilities.invokeLater(() -> new StudentInformationSystem());
     }
 }
