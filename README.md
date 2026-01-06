@@ -21,3 +21,27 @@ A Java console-based calculator built using BigDecimal for precision.
 ```bash
 javac EnhancedCalculator.java
 java EnhancedCalculator
+```
+
+## Task 3: Student Information System with Swing GUI
+
+A Java-based Student Information System developed using **Swing GUI**, allowing users to manage student records through a graphical interface.
+
+### Features
+- Add student details
+- Display student records
+- Update student information
+- Delete student records
+- User-friendly Swing interface
+- Input validation and exception handling
+
+### Technologies Used
+- Java  
+- Java Swing  
+- Event Handling  
+- OOP  
+
+### How to Run
+```bash
+javac StudentInformationSystem.java
+java StudentInformationSystem
