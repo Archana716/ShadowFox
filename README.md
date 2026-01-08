@@ -43,5 +43,5 @@ A Java-based Student Information System developed using **Swing GUI**, allowing 
 
 ### How to Run
 ```bash
-javac StudentInfoSystem.java
-java StudentInfoSystem
+javac StudentInformationSystem.java
+java StudentInformationSystem
