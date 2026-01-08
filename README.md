@@ -45,3 +45,29 @@ A Java-based Student Information System developed using **Swing GUI**, allowing 
 ```bash
 javac StudentInformationSystem.java
 java StudentInformationSystem
+```
+
+
+## Task 2: Simple Contact Management System (Java)
+
+### Description
+A command-line Contact Management System developed using Java.
+It supports CRUD operations (Create, Read, Update, Delete) with
+input validation and in-memory storage using ArrayList.
+
+### Features
+- Add, view, search, update, and delete contacts
+- Prevents duplicate phone numbers
+- Case-insensitive search
+- Email and phone number validation
+- Menu-driven CLI interface
+
+### Technologies Used
+- Java
+- ArrayList
+- Regex for validation
+
+### How to Run
+```bash
+javac Contact.java ContactManager.java
+java ContactManager
