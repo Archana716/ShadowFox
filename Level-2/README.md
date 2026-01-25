@@ -26,5 +26,5 @@ This application helps manage products, stock levels, and basic inventory operat
 
 ## How to Run
 ```bash
-javac InventoryManagementSystem.java
-java InventoryManagementSystem
+javac InventoryBillingApp.java
+java InventoryBillingApp
